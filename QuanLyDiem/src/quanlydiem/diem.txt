@@ -1,2 +1,9 @@
-Nguyen Van A-8-9-8-9-7.5
-sadasdsa
+Ho Ten SV,Mon Hoc 1,Mon Hoc 2,Mon Hoc 3,Mon Hoc 4,Mon Hoc 5
+Nguyen Van A,1,2,3,4,5
+Nguyen Van B,6,8,9,3,4
+Nguyen Chi Thanh,7.75,3,6,9,0
+Tran Thu Do,6,8,7,9,5.25
+Tran Van Hoang,7,3,6.5,9,1
+Nguyen Van Tu,6,8,7,3,5
+Dinh Van Thu,5,8,6,9,7
+Truong Hoang Khanh,8,7,9,7,7

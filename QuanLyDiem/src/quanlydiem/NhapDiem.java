@@ -5,12 +5,25 @@
  */
 package quanlydiem;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,7 +34,7 @@ public class NhapDiem extends javax.swing.JFrame {
     /**
      * Creates new form NhapDiem
      */
-    public NhapDiem() {
+    public NhapDiem() throws IOException {
         initComponents();
         try {
             //Đọc file dssinhvien
@@ -29,37 +42,33 @@ public class NhapDiem extends javax.swing.JFrame {
             Scanner scanner = new Scanner(danhSachSinhVien);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                System.out.println(line);
                 cboSinhVien.addItem(line);
             }
             scanner.close();
-            
+
             //Đọc file diem
             File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
             Scanner scanner2 = new Scanner(diem);
             ArrayList<String> dsDiem = new ArrayList<String>();
             while (scanner2.hasNextLine()) {
                 String line = scanner2.nextLine();
-                String[] thongTinDiem = line.split("-");
+                String[] thongTinDiem = line.split(",");
                 for (int i = 0; i < thongTinDiem.length; i++) {
                     dsDiem.add(thongTinDiem[i]);
                 }
             }
             scanner2.close();
-            Iterator<String> i = dsDiem.iterator();
-            while (i.hasNext()) {
-                System.out.println(i.next());
-            }
+
+            //In ra noi dung
+//            Iterator<String> i = dsDiem.iterator();
+//            while (i.hasNext()) {
+//                System.out.println(i.next());
+//            }
+            FileCapNhatTableDiem();
         } catch (FileNotFoundException e) {
             System.out.println("Khong co file.");
             e.printStackTrace();
         }
-        
-        //Đưa dữ liệu vào lstDiem
-        DefaultListModel lstModel = new DefaultListModel();
-        lstDiem.setModel(lstModel);
-        lstModel.addElement("Họ Tên HS   Điểm Môn 1   Điểm Môn 2   Điểm Môn 3   Điểm Môn 4   Điểm Môn 5");
-        lstModel.addElement("Nguyen Van A   9   7   6   9   5.5");
     }
 
     /**
@@ -76,9 +85,7 @@ public class NhapDiem extends javax.swing.JFrame {
         cboSinhVien = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtDiem1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstDiem = new javax.swing.JList<>();
+        btnNhap = new javax.swing.JButton();
         txtDiem2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtDiem3 = new javax.swing.JTextField();
@@ -87,6 +94,8 @@ public class NhapDiem extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtDiem5 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDiem = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,16 +112,13 @@ public class NhapDiem extends javax.swing.JFrame {
 
         txtDiem1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Nhập");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNhap.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNhap.setText("Nhập");
+        btnNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNhapActionPerformed(evt);
             }
         });
-
-        lstDiem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jScrollPane1.setViewportView(lstDiem);
 
         txtDiem2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -134,32 +140,40 @@ public class NhapDiem extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Môn Học 5:");
 
+        tblDiem.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblDiem.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tblDiem);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(cboSinhVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(193, 193, 193)
-                            .addComponent(jLabel1)
-                            .addGap(175, 175, 175))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtDiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtDiem2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnNhap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboSinhVien, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDiem2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -171,7 +185,8 @@ public class NhapDiem extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtDiem5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtDiem5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -200,18 +215,91 @@ public class NhapDiem extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtDiem5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapActionPerformed
+        DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
+        //Duyệt dữ liệu để tìm dòng khớp với dl nhập vào
+        for (int row = 0; row < modelDiem.getRowCount(); row++) {
+            //Neu dong do co ten sinh vien trung voi sinh vien dang duoc chon o combobox
+            if (modelDiem.getValueAt(row, 0).toString().equals(cboSinhVien.getSelectedItem().toString())) {
+                //Update table
+                modelDiem.setValueAt(txtDiem1.getText(), row, 1);
+                modelDiem.setValueAt(txtDiem2.getText(), row, 2);
+                modelDiem.setValueAt(txtDiem3.getText(), row, 3);
+                modelDiem.setValueAt(txtDiem4.getText(), row, 4);
+                modelDiem.setValueAt(txtDiem5.getText(), row, 5);
+                try {
+                    //Từ table update vào file
+                    TableDiemCapNhatFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(NhapDiem.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                //Thoat khoi ham
+                return;
+            }
+        }
+        //Trường hợp không tồn tại thì thêm dòng mới vào file và dùng hàm đổ dữ liệu vào table
+        Path file = Paths.get("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        String svMoi = cboSinhVien.getSelectedItem().toString() + "," + txtDiem1.getText() + "," + txtDiem2.getText() + "," + txtDiem3.getText() + "," + txtDiem4.getText() + "," + txtDiem5.getText() + "\r\n";
+        try {
+            Files.write(file, svMoi.getBytes(), StandardOpenOption.APPEND);
+            FileCapNhatTableDiem();
+        } catch (IOException ex) {
+            Logger.getLogger(NhapDiem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnNhapActionPerformed
+
+    //Tu file do du lieu vao table
+    private void FileCapNhatTableDiem() throws IOException {
+        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        BufferedReader br = new BufferedReader(new FileReader(diem));
+        DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
+
+        //Header
+        String firstLine = br.readLine().trim();
+        String[] columnsName = firstLine.split(",");
+
+        modelDiem.setColumnIdentifiers(columnsName);
+
+        //Clear dong cu
+        modelDiem.setRowCount(0);
+
+        //Add du lieu
+        Object[] tableLines = br.lines().toArray();
+        for (int dem = 0; dem < tableLines.length; dem++) {
+            String dong = tableLines[dem].toString().trim();
+            String[] dongDuLieu = dong.split(",");
+            modelDiem.addRow(dongDuLieu);
+        }
+    }
+
+    //Từ table đổ dữ liệu vào file
+    private void TableDiemCapNhatFile() throws IOException {
+        DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
+        //Lấy dữ liệu của jtable ra
+        String dsDiem = "Ho Ten SV,Mon Hoc 1,Mon Hoc 2,Mon Hoc 3,Mon Hoc 4,Mon Hoc 5\r\n";
+        for (int row = 0; row < modelDiem.getRowCount(); row++) {
+            for (int col = 0; col < modelDiem.getColumnCount(); col++) {
+                if (col < modelDiem.getColumnCount() - 1) { //Không phải là cột cuối thì phẩy
+                    dsDiem += modelDiem.getValueAt(row, col).toString() + ",";
+                } else { //Là cột cuối cùng thì xuồng dòng
+                    dsDiem += modelDiem.getValueAt(row, col).toString() + "\r\n";
+                }
+            }
+        }
+        //Ghi vào file
+        Path file = Paths.get("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        Files.write(file, dsDiem.getBytes(), StandardOpenOption.CREATE);
+    }
 
     /**
      * @param args the command line arguments
@@ -243,14 +331,18 @@ public class NhapDiem extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NhapDiem().setVisible(true);
+                try {
+                    new NhapDiem().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(NhapDiem.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNhap;
     private javax.swing.JComboBox<String> cboSinhVien;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -258,8 +350,8 @@ public class NhapDiem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lstDiem;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblDiem;
     private javax.swing.JTextField txtDiem1;
     private javax.swing.JTextField txtDiem2;
     private javax.swing.JTextField txtDiem3;

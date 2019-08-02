@@ -7,9 +7,11 @@ package quanlydiem;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -46,8 +48,13 @@ public class TraCuuDiem extends javax.swing.JFrame {
 
     //Tu file do du lieu vao table
     private void FileCapNhatTableDiem() throws IOException {
-        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
-        BufferedReader br = new BufferedReader(new FileReader(diem));
+//        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+//        BufferedReader br = new BufferedReader(new FileReader(diem));
+        File fileDir = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader(
+                        new FileInputStream(fileDir), "UTF8"));
         DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
 
         //Header

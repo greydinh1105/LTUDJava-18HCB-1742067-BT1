@@ -27,26 +27,24 @@ public class TraCuuDiem extends javax.swing.JFrame {
      */
     public TraCuuDiem() throws FileNotFoundException, IOException {
         initComponents();
-        
-        //Đọc file diem
-            File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
-            Scanner scanner2 = new Scanner(diem);
-            ArrayList<String> dsDiem = new ArrayList<String>();
-            while (scanner2.hasNextLine()) {
-                String line = scanner2.nextLine();
-                String[] thongTinDiem = line.split(",");
-                for (int i = 0; i < thongTinDiem.length; i++) {
-                    dsDiem.add(thongTinDiem[i]);
-                }
-            }
-            scanner2.close();
-            FileCapNhatTableDiem();
 
-        
+        //Đọc file diem
+        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        Scanner scanner2 = new Scanner(diem);
+        ArrayList<String> dsDiem = new ArrayList<String>();
+        while (scanner2.hasNextLine()) {
+            String line = scanner2.nextLine();
+            String[] thongTinDiem = line.split(",");
+            for (int i = 0; i < thongTinDiem.length; i++) {
+                dsDiem.add(thongTinDiem[i]);
+            }
+        }
+        scanner2.close();
+        FileCapNhatTableDiem();
+
     }
-    
-    
-     //Tu file do du lieu vao table
+
+    //Tu file do du lieu vao table
     private void FileCapNhatTableDiem() throws IOException {
         File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
         BufferedReader br = new BufferedReader(new FileReader(diem));
@@ -69,7 +67,6 @@ public class TraCuuDiem extends javax.swing.JFrame {
             modelDiem.addRow(dongDuLieu);
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,16 +159,24 @@ public class TraCuuDiem extends javax.swing.JFrame {
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
-         DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
-         //Duyệt dữ liệu để tìm dòng khớp với dl nhập vào
-        for (int row = 0; row < modelDiem.getRowCount(); row++) {
-            //Neu dong do co ten sinh vien trung voi sinh vien dang duoc chon o combobox
-            if (!modelDiem.getValueAt(row, 0).toString().contains(txtSV.getText())) {
-                modelDiem.removeRow(row);
-                
+        DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
+        String tenSV = txtSV.getText();
+        if (tenSV.equals("")) {
+            try {
+                FileCapNhatTableDiem();
+            } catch (IOException ex) {
+                Logger.getLogger(TraCuuDiem.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+        //Duyệt dữ liệu để tìm dòng khớp với dl nhập vào
+        for (int row = 0; row < modelDiem.getRowCount(); row++) {
+            //Neu dong do co ten sinh vien trung voi sinh vien dang duoc chon o combobox
+            if (modelDiem.getValueAt(row, 0).toString().contains(tenSV) == false) {
+                modelDiem.removeRow(row);
+                row = 0;
+            }
+        }
+
     }//GEN-LAST:event_btnTimActionPerformed
 
     /**

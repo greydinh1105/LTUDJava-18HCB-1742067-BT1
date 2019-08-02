@@ -16,7 +16,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -128,23 +131,30 @@ public class TraCuuDiem extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
         String tenSV = txtSV.getText();
+        try {
+            FileCapNhatTableDiem();
+        } catch (IOException ex) {
+            Logger.getLogger(TraCuuDiem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(modelDiem);
+        tblDiem.setRowSorter(sorter);
         if (tenSV.equals("")) {
-            try {
-                FileCapNhatTableDiem();
-            } catch (IOException ex) {
-                Logger.getLogger(TraCuuDiem.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter(tenSV));
         }
-        //Duyệt dữ liệu để tìm dòng khớp với dl nhập vào
-        for (int row = 0; row < modelDiem.getRowCount(); row++) {
-            //Neu dong do co ten sinh vien trung voi sinh vien dang duoc chon o combobox
-            if (modelDiem.getValueAt(row, 0).toString().contains(tenSV) == false) {
-                modelDiem.removeRow(row);
-                row = 0;
-            }
-        }
+//            //Duyệt dữ liệu để tìm dòng khớp với dl nhập vào
+//            for (int row = 0; row < modelDiem.getRowCount(); row++) {
+//                //Neu dong do co ten sinh vien trung voi sinh vien dang duoc chon o combobox
+//                if (modelDiem.getValueAt(row, 0).toString().contains(tenSV) == false) {
+//                    modelDiem.removeRow(row);
+//                    row = 0;
+//                }
+//            }
+
+
     }//GEN-LAST:event_btnTimActionPerformed
-    
+
     private void FileCapNhatTableDiem() throws IOException {
 //        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\TraCuuDiem\src\\tracuudiem\\diem.txt");
 //        BufferedReader br = new BufferedReader(new FileReader(diem));

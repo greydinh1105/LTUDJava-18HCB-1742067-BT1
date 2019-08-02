@@ -44,7 +44,7 @@ public class NhapDiem extends javax.swing.JFrame {
         try {
             //Đọc file dssinhvien
             File danhSachSinhVien = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\dssinhvien.txt");
-            Scanner scanner = new Scanner(danhSachSinhVien);
+            Scanner scanner = new Scanner(danhSachSinhVien, "UTF-8");
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 cboSinhVien.addItem(line);
@@ -310,8 +310,13 @@ public class NhapDiem extends javax.swing.JFrame {
             }
         }
         //Ghi vào file
-        Path file = Paths.get("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
-        Files.write(file, dsDiem.getBytes(), StandardOpenOption.CREATE);
+//        Path file = Paths.get("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+//        Files.write(file, dsDiem.getBytes(), StandardOpenOption.CREATE);
+        Writer out = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt"), "UTF8"));
+        out.write(dsDiem);
+        out.flush();
+        out.close();
     }
 
     /**

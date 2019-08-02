@@ -6,15 +6,18 @@
 package quanlydiem;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -228,9 +231,12 @@ public class NhapDiem extends javax.swing.JFrame {
 
     private void btnNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapActionPerformed
         DefaultTableModel modelDiem = (DefaultTableModel) tblDiem.getModel();
+        System.out.println(modelDiem.getValueAt(0, 0).toString().equals(cboSinhVien.getSelectedItem().toString()));
+        System.out.println(cboSinhVien.getSelectedItem().toString());
         //Duyệt dữ liệu để tìm dòng khớp với dl nhập vào
         for (int row = 0; row < modelDiem.getRowCount(); row++) {
             //Neu dong do co ten sinh vien trung voi sinh vien dang duoc chon o combobox
+
             if (modelDiem.getValueAt(row, 0).toString().equals(cboSinhVien.getSelectedItem().toString())) {
                 //Update table
                 modelDiem.setValueAt(txtDiem1.getText(), row, 1);

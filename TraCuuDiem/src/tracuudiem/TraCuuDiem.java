@@ -156,9 +156,9 @@ public class TraCuuDiem extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimActionPerformed
 
     private void FileCapNhatTableDiem() throws IOException {
-//        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\TraCuuDiem\src\\tracuudiem\\diem.txt");
+//        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
 //        BufferedReader br = new BufferedReader(new FileReader(diem));
-        File fileDir = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\TraCuuDiem\\src\\tracuudiem\\diem.txt");
+        File fileDir = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
 
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(

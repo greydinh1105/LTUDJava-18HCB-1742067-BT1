@@ -264,7 +264,7 @@ public class NhapDiem extends javax.swing.JFrame {
     private void FileCapNhatTableDiem() throws IOException {
 //        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
 //        BufferedReader br = new BufferedReader(new FileReader(diem));
-        File fileDir = new File("D:\\\\DoAnJavaHL\\\\LTUDJava-18HCB-1742067-BT1\\\\QuanLyDiem\\\\src\\\\quanlydiem\\\\diem.txt");
+        File fileDir = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
 
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(

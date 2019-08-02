@@ -33,7 +33,7 @@ public class TraCuuDiem extends javax.swing.JFrame {
     public TraCuuDiem() throws FileNotFoundException, IOException {
         initComponents();
         //Đọc file diem
-        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        File diem = new File("diem.txt");
         Scanner scanner2 = new Scanner(diem);
         ArrayList<String> dsDiem = new ArrayList<String>();
         while (scanner2.hasNextLine()) {
@@ -158,7 +158,7 @@ public class TraCuuDiem extends javax.swing.JFrame {
     private void FileCapNhatTableDiem() throws IOException {
 //        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
 //        BufferedReader br = new BufferedReader(new FileReader(diem));
-        File fileDir = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        File fileDir = new File("diem.txt");
 
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(

@@ -43,7 +43,7 @@ public class NhapDiem extends javax.swing.JFrame {
         initComponents();
         try {
             //Đọc file dssinhvien
-            File danhSachSinhVien = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\dssinhvien.txt");
+            File danhSachSinhVien = new File("dssinhvien.txt");
             Scanner scanner = new Scanner(danhSachSinhVien, "UTF-8");
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -52,7 +52,8 @@ public class NhapDiem extends javax.swing.JFrame {
             scanner.close();
 
             //Đọc file diem
-            File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+//            File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+            File diem = new File("diem.txt");
             Scanner scanner2 = new Scanner(diem);
             ArrayList<String> dsDiem = new ArrayList<String>();
             while (scanner2.hasNextLine()) {
@@ -255,7 +256,7 @@ public class NhapDiem extends javax.swing.JFrame {
             }
         }
         //Trường hợp không tồn tại thì thêm dòng mới vào file và dùng hàm đổ dữ liệu vào table
-        Path file = Paths.get("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        Path file = Paths.get("diem.txt");
         String svMoi = cboSinhVien.getSelectedItem().toString() + "," + txtDiem1.getText() + "," + txtDiem2.getText() + "," + txtDiem3.getText() + "," + txtDiem4.getText() + "," + txtDiem5.getText() + "\r\n";
         try {
             Files.write(file, svMoi.getBytes(), StandardOpenOption.APPEND);
@@ -270,7 +271,7 @@ public class NhapDiem extends javax.swing.JFrame {
     private void FileCapNhatTableDiem() throws IOException {
 //        File diem = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
 //        BufferedReader br = new BufferedReader(new FileReader(diem));
-        File fileDir = new File("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
+        File fileDir = new File("diem.txt");
 
         BufferedReader br = new BufferedReader(
                 new InputStreamReader(
@@ -313,7 +314,7 @@ public class NhapDiem extends javax.swing.JFrame {
 //        Path file = Paths.get("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt");
 //        Files.write(file, dsDiem.getBytes(), StandardOpenOption.CREATE);
         Writer out = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream("D:\\DoAnJavaHL\\LTUDJava-18HCB-1742067-BT1\\QuanLyDiem\\src\\quanlydiem\\diem.txt"), "UTF8"));
+                new FileOutputStream("diem.txt"), "UTF8"));
         out.write(dsDiem);
         out.flush();
         out.close();

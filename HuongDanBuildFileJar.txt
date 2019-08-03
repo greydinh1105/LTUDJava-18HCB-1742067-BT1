@@ -1,0 +1,4 @@
+﻿1. Để build file jar cẩn vào Project "QuanLyDiem", "TraCuuDiem" sau đó chọn "Clean and Build"
+2. Tiếp theo vào thư mục "QuanLyDiem\src\quanlydiem\" để copy 2 file text "diem.txt" và "dssinhvien.txt" 
+   vào nơi build file Jar (QuanLyDiem\dist).
+3. Open file "QuanlyDiem.jar" và "TraCuuDiem.jar" để sử dụng.

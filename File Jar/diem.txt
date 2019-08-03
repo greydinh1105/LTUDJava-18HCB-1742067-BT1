@@ -1,13 +1,13 @@
-﻿Ho Ten SV,Mon Hoc 1,Mon Hoc 2,Mon Hoc 3,Mon Hoc 4,Mon Hoc 5
+Ho Ten SV,Mon Hoc 1,Mon Hoc 2,Mon Hoc 3,Mon Hoc 4,Mon Hoc 5
 Nguyễn Văn A,7,3,6,9,10
-Nguyễn Văn B,7,7,7,7,7
-Nguyễn Chí Thanh,7,8,7,8,7
+Nguyễn Văn B,2,4,3,5,6
+Nguyễn Chí Thanh,4,8,5,7,6
 Trần Thủ Độ,6,8,7,9,5.25
 Trần Văn Hoàng,7,3,6.5,9,1
 Nguyễn Văn Tự,6,8,7,3,5
 Đinh Văn Thu,5,8,6,9,7﻿
 Nguyễn Thành Nam,7,7,7,7,7
-Đỗ Thu Cúc,7,7,7,7,7
+Đỗ Thu Cúc,2,4,3,5,6
 Nguyễn Thị D,7,7,7,7,7
 Trẩn Minh Nhựt,7,7,7,7,7
 Hoàng Thanh Đức,7,7,7,7,7
@@ -15,3 +15,4 @@ Lê Kim Ngọc,7,7,7,7,7
 Trần Thu Trà,7,7,7,7,7
 Ngô Minh Cảnh,7,7,7,7,7
 La Ngọc Ánh,7,7,7,7,7
+?Nguy?n V?n A,1,5,2,4,3
